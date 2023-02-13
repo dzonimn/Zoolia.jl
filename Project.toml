@@ -1,0 +1,13 @@
+name = "Zoolia"
+uuid = "960e49e0-6b3f-4b6f-af8a-d44cd5534395"
+authors = ["dzonimn"]
+version = "0.1.0"
+
+[compat]
+julia = "1"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
