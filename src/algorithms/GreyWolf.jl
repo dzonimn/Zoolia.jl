@@ -22,6 +22,7 @@ mutable struct _Wolf
     position::Vector{Float64}
     fitness::Float64
 end
+fitness(w::_Wolf) = w.fitness
 
 function (GWO::GreyWolfOptimizer)(func, search_range, n_dim)
     pop_size = GWO.pop_size
@@ -39,7 +40,7 @@ function (GWO::GreyWolfOptimizer)(func, search_range, n_dim)
     end
     
     # Sort the wolves in order and extract the top 3 wolves
-    sort!(population; by=x->x.fitness)
+    sort!(population; by=fitness)
     Wₐ, Wᵦ, Wᵧ = population[1:3]
 
     Iter = 0
@@ -71,7 +72,7 @@ function (GWO::GreyWolfOptimizer)(func, search_range, n_dim)
             end
         end
         
-        sort!(population; by=x->x.fitness)
+        sort!(population; by=fitness)
         
         Wₐ, Wᵦ, Wᵧ = population[1:3]
         
