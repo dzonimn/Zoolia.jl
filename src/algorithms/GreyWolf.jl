@@ -11,15 +11,15 @@ ISSN 0965-9978,
 https://doi.org/10.1016/j.advengsoft.2013.12.007.
 (https://www.sciencedirect.com/science/article/pii/S0965997813001853)
 """
-@kwdef struct GreyWolfOptimizer <: Optimizer
-    pop_size::Int = 40
-    max_iter::Int = 500
-    verbose::Bool = true
+struct GreyWolfOptimizer <: Optimizer
+    pop_size::Int
+    max_iter::Int
+    verbose::Bool
 end
-GreyWolfOptimizer(; pop_size, max_iter, verbose=true) = GreyWolfOptimizer(pop_size, max_iter, verbose)
+GreyWolfOptimizer(; pop_size=100, max_iter=1000, verbose=true) = GreyWolfOptimizer(pop_size, max_iter, verbose)
 
-mutable struct _Wolf{T}
-    position::Vector{T}
+mutable struct _Wolf
+    position::Vector{Float64}
     fitness::Float64
 end
 
@@ -66,7 +66,7 @@ function (GWO::GreyWolfOptimizer)(func, search_range, n_dim)
             fnew = func(Xnew)
             
             if fnew < population[i].fitness
-                population[i].position = copy(Xnew)
+                population[i].position .= Xnew
                 population[i].fitness = fnew
             end
         end
