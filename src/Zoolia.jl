@@ -5,6 +5,8 @@ using Distributions
 
 export optimize
 export GreyWolfOptimizer, WhaleOptimizer
+export best_fitness, best_position
+
 
 include("types.jl")
 include("algorithms/GreyWolf.jl")
